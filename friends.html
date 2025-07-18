@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecConnect - Friends</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="RecConnect Logo" class="logo" />
+    <h1>RecConnect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recommendations.html">My Recommendations</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="user.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="friends">
+    <h2>My Friends</h2>
+    <form id="addFriendForm">
+      <input type="text" id="friendInput" placeholder="Enter username to add..." required />
+      <button type="submit">Add Friend</button>
+    </form>
+
+    <ul id="friendsList"></ul>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RecConnect. All rights reserved.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    const friendsList = document.getElementById('friendsList');
+    const form = document.getElementById('addFriendForm');
+    const input = document.getElementById('friendInput');
+
+    function renderFriends(friends) {
+      friendsList.innerHTML = '';
+      friends.forEach(name => {
+        const li = document.createElement('li');
+        li.textContent = name + ' ';
+        const btn = document.createElement('button');
+        btn.textContent = 'Remove';
+        btn.onclick = () => {
+          const updated = Storage.load('friends').filter(f => f !== name);
+          Storage.save('friends', updated);
+          renderFriends(updated);
+        };
+        li.appendChild(btn);
+        friendsList.appendChild(li);
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = input.value.trim();
+      if (!name) return;
+      const friends = Storage.load('friends');
+      if (!friends.includes(name)) {
+        friends.push(name);
+        Storage.save('friends', friends);
+        renderFriends(friends);
+      }
+      input.value = '';
+    });
+
+    renderFriends(Storage.load('friends'));
+  </script>
+</body>
+</html>

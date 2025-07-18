@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecConnect - My Profile</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="RecConnect Logo" class="logo" />
+    <h1>RecConnect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recommendations.html">My Recommendations</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="user.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="user-profile">
+    <h2>My Profile</h2>
+    <div class="card">
+      <h3>Username: jordan123</h3>
+      <p>Total Points: <strong id="totalPoints">Loading...</strong></p>
+      <p>Overall Score: <strong id="overallScore">Loading...</strong></p>
+      <p>Global Rank: <strong>#12</strong></p>
+    </div>
+
+    <h3>Relationship Scores</h3>
+    <table id="relationshipTable">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Liked</th>
+          <th>Total Sent</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RecConnect. All rights reserved.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    function summarizeRecommendations() {
+      const recommendations = Storage.load('recommendations');
+      let points = 0, liked = 0, total = 0;
+      const userMap = {};
+
+      recommendations.forEach(rec => {
+        if (rec.status === 'sent') points -= rec.points;
+        if (rec.status === 'accepted' && rec.rating === 'liked') {
+          points += rec.points * 2;
+          liked++;
+        }
+        if (rec.status === 'accepted' && rec.rating === 'disliked') {
+        }
+        if (['accepted', 'rejected', 'ignored'].includes(rec.status)) {
+          total++;
+        }
+
+        if (!userMap[rec.to]) userMap[rec.to] = { liked: 0, total: 0 };
+        if (rec.status === 'accepted') {
+          userMap[rec.to].total++;
+          if (rec.rating === 'liked') userMap[rec.to].liked++;
+        } else if (rec.status === 'rejected' || rec.status === 'ignored') {
+          userMap[rec.to].total++;
+        }
+      });
+
+      document.getElementById('totalPoints').innerText = points;
+      document.getElementById('overallScore').innerText = total ? Math.round((liked / total) * 100) + '%' : 'N/A';
+
+      const tbody = document.querySelector('#relationshipTable tbody');
+      tbody.innerHTML = '';
+      for (const user in userMap) {
+        const row = document.createElement('tr');
+        const stats = userMap[user];
+        const score = stats.total ? Math.round((stats.liked / stats.total) * 100) : 0;
+        row.innerHTML = `<td>${user}</td><td>${stats.liked}</td><td>${stats.total}</td><td>${score}%</td>`;
+        tbody.appendChild(row);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', summarizeRecommendations);
+  </script>
+</body>
+</html>
