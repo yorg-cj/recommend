@@ -1,0 +1,1 @@
+// Final storage.js placeholder
