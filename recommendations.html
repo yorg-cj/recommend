@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecConnect - Recommendations</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="RecConnect Logo" class="logo" />
+    <h1>RecConnect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recommendations.html">My Recommendations</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="user.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="recommendations">
+    <section class="search-section">
+      <h2>Send a Recommendation</h2>
+      <form id="recommendForm">
+        <input type="text" id="searchInput" placeholder="Search for a book or movie..." required />
+        <input type="text" id="recipientInput" placeholder="Enter friend's username..." required />
+        <input type="number" id="pointsInput" placeholder="Bet points (e.g. 5)" min="1" required />
+        <button type="submit">Send Recommendation</button>
+      </form>
+    </section>
+
+    <section class="tabs">
+      <button class="tab-btn" onclick="showTab('sent')">Sent</button>
+      <button class="tab-btn" onclick="showTab('accepted')">Accepted</button>
+      <button class="tab-btn" onclick="showTab('rejected')">Rejected</button>
+      <button class="tab-btn" onclick="showTab('ignored')">Ignored</button>
+    </section>
+
+    <section id="sent" class="tab-content active"></section>
+    <section id="accepted" class="tab-content"></section>
+    <section id="rejected" class="tab-content"></section>
+    <section id="ignored" class="tab-content"></section>
+  </main>
+  <footer>
+    <p>&copy; 2025 RecConnect. All rights reserved.</p>
+  </footer>
+  <script src="js/storage.js"></script>
+  <script src="js/recommendations.js"></script>
+</body>
+</html>

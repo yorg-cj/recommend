@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecConnect - Leaderboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="RecConnect Logo" class="logo" />
+    <h1>RecConnect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recommendations.html">My Recommendations</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="user.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="leaderboard">
+    <h2>Leaderboard</h2>
+    <section class="tabs">
+      <button class="tab-btn" onclick="showTab('global')">Global</button>
+      <button class="tab-btn" onclick="showTab('friends')">Friends</button>
+    </section>
+    <section id="global" class="tab-content active">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Total Points</th>
+            <th>Score %</th>
+            <th>Relationship Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>user123</td><td>1250</td><td>93%</td><td>75%</td></tr>
+          <tr><td>2</td><td>example_user</td><td>1140</td><td>91%</td><td>88%</td></tr>
+          <tr><td>3</td><td>john_doe</td><td>980</td><td>89%</td><td>70%</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section id="friends" class="tab-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Total Points</th>
+            <th>Score %</th>
+            <th>Relationship Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>alex_friend</td><td>940</td><td>88%</td><td>92%</td></tr>
+          <tr><td>2</td><td>sam_buddy</td><td>850</td><td>87%</td><td>81%</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 RecConnect. All rights reserved.</p>
+  </footer>
+  <script>
+    const showTab = (id) => {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecConnect - Your Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="RecConnect Logo" class="logo" />
+    <h1>RecConnect</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recommendations.html">My Recommendations</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="user.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="dashboard">
+    <section class="summary">
+      <div class="card">
+        <h2>Total Points</h2>
+        <p id="points">Loading...</p>
+      </div>
+      <div class="card">
+        <h2>Your Score</h2>
+        <p id="score">Loading...</p>
+      </div>
+      <div class="card">
+        <h2>Global Rank</h2>
+        <p id="rank">Loading...</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 RecConnect. All rights reserved.</p>
+  </footer>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
